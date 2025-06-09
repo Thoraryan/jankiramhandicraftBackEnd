@@ -21,6 +21,10 @@ const adminSchema = new mongoose.Schema(
     },
     otp: String,
     otpExpires: Date,
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     pendingUpdate: {
       userName: String,
       email: String,
@@ -29,7 +33,6 @@ const adminSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
 // Compare passwords
 adminSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
